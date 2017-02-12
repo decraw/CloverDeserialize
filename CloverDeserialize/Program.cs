@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp4
+namespace CloverDeserialize
 {
     class Program
     {
@@ -12,6 +12,7 @@ namespace ConsoleApp4
         {
             var jsonstr = System.IO.File.ReadAllText("Clover.json");
             var webhook = Newtonsoft.Json.JsonConvert.DeserializeObject<WebHookBody>(jsonstr);
+            // Only return the records when no later update
             var flattened = (from merchDict in webhook.merchants
                              from chgLog in merchDict.Value
                              where !merchDict.Value.Any(chgLog2 => chgLog2.objectId == chgLog.objectId && chgLog2.ts > chgLog.ts)
