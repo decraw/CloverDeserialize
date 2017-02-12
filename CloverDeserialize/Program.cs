@@ -20,6 +20,7 @@ namespace CloverDeserialize
 
             var grouped = flattened.GroupBy(f => f.merchant).ToDictionary(f => f.Key, f=> f.Select(ch => ch.change).ToList());
             var webHookDeDuped = new WebHookBody { appId = webhook.appId, merchants = grouped };
+            // test merchants field
             var merch = webHookDeDuped.Merchants.ToList();
         }
     }
